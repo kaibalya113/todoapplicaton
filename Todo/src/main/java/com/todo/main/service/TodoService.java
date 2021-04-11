@@ -2,9 +2,11 @@ package com.todo.main.service;
 
 import com.todo.main.controller.TodoController;
 import com.todo.main.dao.TodoDao;
+import com.todo.main.model.Process;
 import com.todo.main.model.Todo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.tomcat.jni.Proc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +24,9 @@ public class TodoService {
         return to;
     }
 
-    public Todo updateTodo(Integer pId, Integer id){
-        Todo to =  todoDao.updateTodo(pId, id);
-        return to;
+    public Integer updateTodo(Integer pId, Integer id){
+         return todoDao.updateTodo(pId, id);
+
     }
 
     public List<Todo> getall(){
@@ -35,4 +37,8 @@ public class TodoService {
         return todoDao.findByIdTodo(id);
     }
 
+
+    public void moveData(Integer pId) {
+        todoDao.moveData(pId);
+    }
 }

@@ -30,4 +30,7 @@ public class Process {
         this.pId = pId;
         this.toDo = toDo;
     }
+
+    public Process() {
+    }
 }

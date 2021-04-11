@@ -1,6 +1,8 @@
 package com.todo.main.controller;
 
+import com.todo.main.model.Process;
 import com.todo.main.model.Todo;
+import com.todo.main.service.ProcessService;
 import com.todo.main.service.TodoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +21,8 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
+    @Autowired
+    private ProcessService processService;
     @GetMapping("/")
     public String index(){
         return "Loding...";
@@ -30,11 +34,11 @@ public class TodoController {
         return todo;
     }
     // modify todo
-    @PostMapping("/update/{pId}/{id}")
-    public String updateTodo(@PathVariable("pId") Integer pId, @PathVariable(value = "id") Integer id){
-        Todo updateToDo = todoService.updateTodo(pId, id);
-        return "sucess...";
-    }
+//    @PostMapping("/update/{pId}/{id}")
+//    public String updateTodo(@PathVariable("pId") Integer pId, @PathVariable(value = "id") Integer id){
+//        Todo updateToDo = todoService.updateTodo(pId, id);
+//        return "sucess...";
+//    }
 
     // get list of todos
     @GetMapping("/findall")
@@ -50,5 +54,17 @@ public class TodoController {
     public Todo getData(@PathVariable("id") Integer id){
         Todo todo = todoService.getData(id);
         return todo;
+    }
+
+    // get all process from db
+    @GetMapping("/getAllProcess")
+    public List<Process> getall(){
+        return processService.getAllProcess();
+
+    }
+
+    @PostMapping("/move/{Pid}/{id}")
+    public Integer moveData(@PathVariable("Pid") Integer pId, @PathVariable("id") Integer id){
+       return todoService.updateTodo(pId, id);
     }
 }
